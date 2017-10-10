@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+	<title>Triple Spinner Test</title>
+	<link rel="stylesheet" href="tripl_spinner.css">
+    </head>
+
+    <body>
+	<div class="container">
+	    <div class="outer">
+		<div class="middle">
+		    <div class="inner">
+			asd
+		    </div>
+		</div>
+	    </div>
+	</div>
+    </body>
+    
+</html>
