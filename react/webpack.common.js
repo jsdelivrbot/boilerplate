@@ -1,8 +1,9 @@
-const ENV = require('./src/config/getEnv');
+const ENV = require('./config/getEnv');
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const VENDOR_LIBS = [
   'axios',
@@ -65,6 +66,7 @@ module.exports = {
       template: './public/index.html'
     }),
     new ExtractTextPlugin('style.css'),
-    new webpack.DefinePlugin(ENV)
+    new webpack.DefinePlugin(ENV),
+    new CleanWebpackPlugin(['build'])
   ]
 };

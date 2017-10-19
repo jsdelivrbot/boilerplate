@@ -1,8 +1,6 @@
 const _ = require('lodash');
 const env = require('../../env.json');
 
-// get curent node environment
-env.NODE_ENV = process.env.NODE_ENV || 'development';
 // prepare the object keys -> append process.env
 const keys = _.mapKeys(env, (val, key) => {
   return `process.env.${key}`;
