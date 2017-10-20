@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import jquery from 'jquery';
 import TestUtils from 'react-dom/test-utils';
 import ReactDOM from 'react-dom';
+import { StaticRouter } from 'react-router-dom';
 import chai, { expect } from 'chai';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -13,13 +14,16 @@ import chaiJquery from 'chai-jquery';
 const dom = new JSDOM('<!doctype html><html><body></body></html>');
 global.window = dom.window;
 global.document = global.window.document;
+
 const $ = jquery(global.window); // bind jquery to global.window
 
 // build 'renderComponent' helper that should render a given react ComponentClass
 function renderComponent(ComponentClass, props, state) {
   const componentInstance = TestUtils.renderIntoDocument(
     <Provider store={createStore(reducers, state)}>
-      <ComponentClass {...props} />
+      <StaticRouter context={{}}>
+        <ComponentClass {...props} />
+      </StaticRouter>
     </Provider>
   );
 
