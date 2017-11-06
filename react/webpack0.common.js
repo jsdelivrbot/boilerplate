@@ -6,6 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const VENDOR_LIBS = [
+  'amazon-cognito-identity-js',
   'axios',
   'lodash',
   'react',
@@ -41,10 +42,22 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true
+            }
+          },
+          {
+            loader: 'postcss-loader'
+          }
+        ]
       },
       {
         test: /\.(png|jpg|gif)$/,
@@ -56,6 +69,10 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       }
     ]
   },
@@ -66,7 +83,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html'
     }),
-    new ExtractTextPlugin('style.[contenthash].css'),
     new webpack.DefinePlugin(ENV),
     new CleanWebpackPlugin(['build'])
   ]
